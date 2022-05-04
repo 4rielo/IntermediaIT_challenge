@@ -14,8 +14,10 @@ class CharactersViewModel(private val charactersRepository: CharactersRepository
     private val _characters = MutableLiveData<List<Character>>()
     val characters: LiveData<List<Character>> get() = _characters
 
+    private var offset: Int = 0
+
     init {
-        loadCharacters(0)
+        loadCharacters(offset)
     }
 
     private fun loadCharacters(offset: Int) {
@@ -32,6 +34,7 @@ class CharactersViewModel(private val charactersRepository: CharactersRepository
     }
 
     fun loadMoreCharacters() {
-        // TODO complete
+        offset = offset.plus(15)
+        loadCharacters(offset)
     }
 }
