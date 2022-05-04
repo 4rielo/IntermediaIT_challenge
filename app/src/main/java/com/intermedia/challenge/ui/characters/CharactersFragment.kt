@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.intermedia.challenge.databinding.FragmentCharactersBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
+
 class CharactersFragment : Fragment() {
 
     private lateinit var binding: FragmentCharactersBinding
@@ -48,8 +49,8 @@ class CharactersFragment : Fragment() {
             // TODO complete
         }
         binding.listCharacters.adapter = adapter
-        viewModel.characters.observe(viewLifecycleOwner, { characters ->
-            // TODO fill adapter items
-        })
+        viewModel.characters.observe(viewLifecycleOwner) { characters ->
+            adapter.addAll(characters)
+        }
     }
 }
