@@ -31,13 +31,20 @@ class LoginActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         auth = FirebaseAuth.getInstance()
-        val currentUser = auth.currentUser
-        if(currentUser == null){
+        if(auth.currentUser != null) {
+            goToMain()
+        } else {
             startFirebaseAuth()
         }
     }
 
-
+    private fun goToMain() {
+        finish()
+        startActivity(Intent(this, MainScreenActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        })
+    }
 
     private fun startFirebaseAuth() {
         val providers = arrayListOf(
@@ -51,27 +58,16 @@ class LoginActivity : AppCompatActivity() {
             .setAvailableProviders(providers)
             .build()
         signInLauncher.launch(signInIntent)
-        //TODO provisional
     }
 
     private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
-        val response = result.idpResponse
         if (result.resultCode == RESULT_OK) {
-            // Successfully signed in
-            val user = auth.currentUser
-
-            finish()
-            startActivity(Intent(this, MainScreenActivity::class.java).apply {
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            })
-
+            goToMain()
         } else {
             // Sign in failed. If response is null the user canceled the
             // sign-in flow using the back button. Otherwise check
             // response.getError().getErrorCode() and handle the error.
             // ...
-
         }
     }
 
