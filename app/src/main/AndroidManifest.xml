@@ -25,6 +25,9 @@
             android:name=".ui.main.MainScreenActivity"
             android:screenOrientation="portrait" />
 
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_application_id"/>
+        <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
+
         <activity
             android:name=".ui.character_detail.CharacterDetailActivity"
             android:screenOrientation="portrait" />

@@ -1,4 +1,8 @@
 <resources>
+    <string name="facebook_application_id" translatable="false">5092210694229411</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb5092210694229411</string>
+    <string name="facebook_client_token" translatable="false">client_token_1234</string>
+
     <string name="app_name">Marvel App</string>
 
     <string name="app_title">Marvel Challenge</string>
