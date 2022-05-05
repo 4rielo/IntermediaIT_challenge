@@ -7,13 +7,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.intermedia.challenge.databinding.FragmentCharactersBinding
+import com.intermedia.challenge.ui.main.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class CharactersFragment : Fragment() {
 
     private lateinit var binding: FragmentCharactersBinding
-    private val viewModel: CharactersViewModel by sharedViewModel()
+    private val viewModel: CharactersViewModel by viewModel()
+    private val mainViewModel: MainViewModel by sharedViewModel()
     private val adapter = CharactersAdapter()
 
     override fun onCreateView(
@@ -46,7 +49,12 @@ class CharactersFragment : Fragment() {
 
     private fun setupCharactersList() {
         adapter.onClickListener = { character ->
-            // TODO complete
+
+            //CharactersFragmentDirections.showCharacterDetail(character)
+            mainViewModel.showCharacterDetailOf(character)
+            //val characterDetailDialog = CharacterDetail.showDialog(character)
+            //activity?.supportFragmentManager?.let { characterDetailDialog.show(it, "characterDialog") }
+
         }
         binding.listCharacters.adapter = adapter
         viewModel.characters.observe(viewLifecycleOwner) { characters ->

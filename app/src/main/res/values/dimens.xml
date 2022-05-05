@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <dimen name="activity_character_detail_description_margin_horizontal">50dp</dimen>
+    <dimen name="activity_character_detail_description_margin_top">10dp</dimen>
+    <dimen name="activity_character_detail_subtitle_margin_top">30dp</dimen>
 </resources>
