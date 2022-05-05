@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.intermedia.challenge.data.models.Thumbnail
 import java.text.DateFormat
 import java.text.SimpleDateFormat
+import java.util.*
 
 @BindingAdapter("imageThumbnail")
 fun setImage(view: ImageView, thumbnail: Thumbnail) {
@@ -22,12 +23,10 @@ fun View.setIsVisible(visible: Boolean?) {
 
 @BindingAdapter("app:date")
 fun setDate(view: TextView, date: String?) {
-    val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US)
     if(!date.isNullOrEmpty()) {
         val dateValue = dateFormat.parse(date)
         val outputDate: DateFormat = DateFormat.getDateInstance(DateFormat.LONG)
-
-        //val outputDate = "${dateValue.day} de ${dateValue.month} ${dateValue.year}"
         view.text = outputDate.format(dateValue)
     }
 }

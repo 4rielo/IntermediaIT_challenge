@@ -1,7 +1,5 @@
 package com.intermedia.challenge.data.models
 
-import java.util.*
-
 data class Event(
     val id: Int = 0,
     val title: String = "",
