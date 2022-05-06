@@ -97,7 +97,19 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/clMainSection"
                 app:layout_constraintStart_toStartOf="parent"
-                android:visibility="gone">
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvComicsToDiscuss"
+                    style="@style/TextAppearance.AppCompat.Headline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_character_detail_subtitle_margin_top"
+                    android:text="@string/comics_to_discuss"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvDetails"
@@ -106,10 +118,9 @@
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="20dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvComicsToDiscuss"
                     tools:listitem="@layout/view_character_appearances_item" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
