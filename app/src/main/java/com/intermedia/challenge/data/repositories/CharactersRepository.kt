@@ -4,7 +4,6 @@ import com.intermedia.challenge.data.models.NetResult
 import com.intermedia.challenge.data.services.CharacterService
 import com.intermedia.challenge.data.services.CharactersResponse
 import com.intermedia.challenge.data.services.ComicDataWrapper
-import retrofit2.Response
 
 class CharactersRepository(
     private val characterService: CharacterService
