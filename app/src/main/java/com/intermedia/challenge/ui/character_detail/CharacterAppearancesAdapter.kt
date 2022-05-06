@@ -37,10 +37,12 @@ class CharacterAppearancesAdapter : BaseAdapter<Comic, CharacterAppearancesAdapt
             binding.apply {
                 appearance = item
                 val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ssZ")
-                item.dates?.first()?.date?.let {
+                item.dates?.first()?.date?.let { it ->
                     val dateValue = dateFormat.parse(it)
                     val outputDate: DateFormat = DateFormat.getDateInstance(DateFormat.YEAR_FIELD)
-                    tvAppearanceDate.text = outputDate.format(dateValue)
+                    dateValue?.let { date ->
+                        tvAppearanceDate.text = outputDate.format(date).takeLast(4)
+                    }
                 }
 
             }
