@@ -1,7 +1,17 @@
 <resources>
+    <string name="facebook_application_id" translatable="false">5092210694229411</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb5092210694229411</string>
+    <string name="facebook_client_token" translatable="false">client_token_1234</string>
+
     <string name="app_name">Marvel App</string>
 
+    <string name="app_title">Marvel Challenge</string>
     <string name="title_characters">Personajes</string>
     <string name="title_events">Eventos</string>
 
+    <string name="appears_in_these_comics">APPEARS IN THESE COMICS</string>
+    <string name="title_character_details">Detalle de personaje</string>
+    <string name="data_is_being_loaded">Please wait while data is being fetched.</string>
+    <string name="something_went_wrong">Algo salió mal. Por favor, intente nuevamente más tarde.</string>
+    <string name="logout">Logout</string>
 </resources>

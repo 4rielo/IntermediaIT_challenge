@@ -7,12 +7,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.intermedia.challenge.databinding.FragmentCharactersBinding
-import org.koin.android.viewmodel.ext.android.sharedViewModel
+import com.intermedia.challenge.ui.main.MainViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class CharactersFragment : Fragment() {
 
     private lateinit var binding: FragmentCharactersBinding
-    private val viewModel: CharactersViewModel by sharedViewModel()
+    private val charactersViewModel: CharactersViewModel by viewModel()
+    private val mainViewModel: MainViewModel by sharedViewModel()
     private val adapter = CharactersAdapter()
 
     override fun onCreateView(
@@ -21,6 +25,11 @@ class CharactersFragment : Fragment() {
     ): View? {
         binding = FragmentCharactersBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = viewLifecycleOwner
+            viewModel = charactersViewModel
+            srSwipeToRefresh.setOnRefreshListener {
+                charactersViewModel.loadCharacters(0)
+                srSwipeToRefresh.isRefreshing = true
+            }
         }
 
         return binding.root
@@ -36,7 +45,7 @@ class CharactersFragment : Fragment() {
         binding.listCharacters.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 if (!recyclerView.canScrollVertically(1)) {
-                    viewModel.loadMoreCharacters()
+                    charactersViewModel.loadMoreCharacters()
                 }
                 super.onScrollStateChanged(recyclerView, newState)
             }
@@ -45,11 +54,12 @@ class CharactersFragment : Fragment() {
 
     private fun setupCharactersList() {
         adapter.onClickListener = { character ->
-            // TODO complete
+            mainViewModel.showCharacterDetailOf(character)
         }
         binding.listCharacters.adapter = adapter
-        viewModel.characters.observe(viewLifecycleOwner, { characters ->
-            // TODO fill adapter items
-        })
+        charactersViewModel.characters.observe(viewLifecycleOwner) { characters ->
+            adapter.addAll(characters)
+            binding.srSwipeToRefresh.isRefreshing = false
+        }
     }
 }

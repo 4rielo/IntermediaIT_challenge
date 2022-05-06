@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "690078227018",
+    "firebase_url": "https://auth-demo-tryout.firebaseio.com",
+    "project_id": "auth-demo-tryout",
+    "storage_bucket": "auth-demo-tryout.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:690078227018:android:bdf2815775d43a364e64b3",
+        "android_client_info": {
+          "package_name": "com.intermedia.challenge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "690078227018-it07teocp6nt2kqk0od7tdrofvvd4r00.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA46ma1o58oa3cezladnxFYKX0XCyJjIn8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "690078227018-it07teocp6nt2kqk0od7tdrofvvd4r00.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:690078227018:android:6d7c6b840ac2e3aa4e64b3",
+        "android_client_info": {
+          "package_name": "com.moneytracker.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "690078227018-it07teocp6nt2kqk0od7tdrofvvd4r00.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA46ma1o58oa3cezladnxFYKX0XCyJjIn8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "690078227018-it07teocp6nt2kqk0od7tdrofvvd4r00.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

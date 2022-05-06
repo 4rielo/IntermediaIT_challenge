@@ -13,7 +13,7 @@ class MarvelApplication: Application() {
         super.onCreate()
 
         startKoin {
-            androidLogger()
+            //androidLogger()
             androidContext(this@MarvelApplication)
             modules(listOf(networkModule, businessModule))
         }
