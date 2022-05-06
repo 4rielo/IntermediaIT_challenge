@@ -1,40 +1,59 @@
 package com.intermedia.challenge.ui.events
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.intermedia.challenge.data.models.Comic
 import com.intermedia.challenge.data.models.Event
 import com.intermedia.challenge.data.models.NetResult
 import com.intermedia.challenge.data.repositories.EventsRepository
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class EventsViewModel(private val eventsRepository: EventsRepository) : ViewModel() {
 
-    private val _events = MutableLiveData<List<Event>>()
-    val events: LiveData<List<Event>> get() = _events
+    private val _eventsAndComics = MutableLiveData<List<Pair<Event, List<Comic>?>>>()
+    val eventsAndComics: LiveData<List<Pair<Event, List<Comic>?>>> = _eventsAndComics
 
-    private var offset: Int = 0
+    private val _isLoading = MutableLiveData<Boolean>(false)
+    val isLoading: LiveData<Boolean> = _isLoading
+
+    private val _connectionError = MutableLiveData<Boolean>(false)
+    val connectionError: LiveData<Boolean> = _connectionError
 
     init {
-        loadEvents(offset)
+        loadEvents()
     }
 
-    private fun loadEvents(offset: Int) {
+    fun loadEvents(offset: Int = 0) {
         viewModelScope.launch {
-            when (val response = eventsRepository.getEvents(offset)) {
-                is NetResult.Success -> {
-                    _events.postValue(response.data.eventsList.eventsList)
+            _isLoading.postValue(true)
+            try {
+                when (val response = eventsRepository.getEvents(offset)) {
+                    is NetResult.Success -> {
+                        val events = response.data.eventsList.eventsList
+                        val eventsAndComics: MutableList<Pair<Event, List<Comic>?>> = mutableListOf()
+                        events.forEach {  event ->
+                            val response = eventsRepository.getEventComics(event.id)
+                            when (response) {
+                                is NetResult.Success -> {
+                                    eventsAndComics.add(event to response.data.comicsList?.listOfComics)
+                                    _connectionError.postValue(false)
+                                }
+                                is NetResult.Error -> {
+                                    eventsAndComics.add(event to emptyList<Comic>())
+                                }
+                            }
+                        }
+                        _eventsAndComics.value = eventsAndComics
+                    }
+                    is NetResult.Error -> {
+                        _connectionError.postValue(true)
+                    }
                 }
-                is NetResult.Error -> {
-                    // TODO complete
-                }
+            } catch (e: Exception) {
+                _connectionError.postValue(true)
             }
+            _isLoading.postValue(false)
         }
     }
 
-    fun loadMoreEvents() {
-        offset = offset.plus(15)
-        loadEvents(offset)
-    }
 }

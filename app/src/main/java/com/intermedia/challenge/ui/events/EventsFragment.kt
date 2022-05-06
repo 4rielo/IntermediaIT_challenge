@@ -12,7 +12,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 class EventsFragment : Fragment() {
 
     private lateinit var binding: FragmentEventsBinding
-    private val viewModel: EventsViewModel by sharedViewModel()
+    private val eventsViewModel: EventsViewModel by sharedViewModel()
     private val adapter = EventsAdapter()
 
     override fun onCreateView(
@@ -21,35 +21,25 @@ class EventsFragment : Fragment() {
     ): View? {
         binding = FragmentEventsBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = viewLifecycleOwner
+            viewModel = eventsViewModel
+            srSwipeToRefresh.setOnRefreshListener {
+                srSwipeToRefresh.isRefreshing = true
+                eventsViewModel.loadEvents()
+            }
         }
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupEventsList()
-        setupPagination()
-    }
-
-    private fun setupPagination() {
-        binding.listEvents.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                if (!recyclerView.canScrollVertically(1)) {
-                    viewModel.loadMoreEvents()
-                }
-                super.onScrollStateChanged(recyclerView, newState)
-            }
-        })
     }
 
     private fun setupEventsList() {
-        adapter.onClickListener = { character ->
-            // TODO complete
-        }
         binding.listEvents.adapter = adapter
-        viewModel.events.observe(viewLifecycleOwner) { events ->
-            adapter.addAll(events)
+        eventsViewModel.eventsAndComics.observe(viewLifecycleOwner) {
+            adapter.addAll(it)
+            binding.srSwipeToRefresh.isRefreshing = false
         }
     }
 }

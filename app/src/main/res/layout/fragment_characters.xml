@@ -1,20 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srSwipeToRefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list_characters"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:itemCount="10"
-            tools:listitem="@layout/view_hero_item" />
+            android:layout_height="match_parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_characters"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="10"
+                tools:listitem="@layout/view_hero_item"
+                android:visibility="@{viewModel.isLoading ? View.GONE : View.VISIBLE}"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvIsLoading"
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:background="@color/white"
+                android:gravity="center"
+                android:text="@string/data_is_being_loaded"
+                android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toTopOf="@id/pbIsLoading"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ProgressBar
+                android:id="@+id/pbIsLoading"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvIsLoading"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvConnectionError"
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="30dp"
+                android:background="@color/white"
+                android:gravity="center"
+                android:text="@string/something_went_wrong"
+                android:visibility="@{viewModel.connectionError ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.intermedia.challenge.ui.characters.CharactersViewModel" />
+
+        <import type="android.view.View" />
+    </data>
 
 </layout>

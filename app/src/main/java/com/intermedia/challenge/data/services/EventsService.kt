@@ -13,6 +13,12 @@ interface EventsService {
         @Query("limit") limit: Int,
         @Query("orderBy") orderBy: String
     ): Response<EventsResponse>
+
+    @GET("events/{eventsID}/comics")
+    suspend fun getEventComics(
+        @Path("eventsID") eventsId: Int,
+        @QueryMap auth: HashMap<String, String>,
+    ): Response<ComicDataWrapper>
 }
 
 data class EventsResponse(
