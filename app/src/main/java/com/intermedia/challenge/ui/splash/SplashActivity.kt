@@ -34,7 +34,7 @@ class SplashActivity: AppCompatActivity() {
 
     private fun goToLogin() {
         val intent = Intent(applicationContext, LoginActivity::class.java)
-        startActivity(intent)
         finish()
+        startActivity(intent)
     }
 }

@@ -56,6 +56,47 @@
                 app:layout_constraintTop_toBottomOf="@id/tvAppearsInTheseComics"
                 tools:listitem="@layout/view_character_appearances_item" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvIsLoading"
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:background="@color/white"
+                android:gravity="center"
+                android:text="@string/data_is_being_loaded"
+                android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toTopOf="@id/pbIsLoading"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ProgressBar
+                android:id="@+id/pbIsLoading"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvIsLoading"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvConnectionError"
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="30dp"
+                android:background="@color/white"
+                android:gravity="center"
+                android:text="@string/something_went_wrong"
+                android:visibility="@{viewModel.connectionError ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
@@ -64,6 +105,12 @@
         <variable
             name="character"
             type="com.intermedia.challenge.data.models.Character" />
+
+        <variable
+            name="viewModel"
+            type="com.intermedia.challenge.ui.character_detail.CharacterDetailViewModel" />
+
+        <import type="android.view.View" />
     </data>
 
 </layout>

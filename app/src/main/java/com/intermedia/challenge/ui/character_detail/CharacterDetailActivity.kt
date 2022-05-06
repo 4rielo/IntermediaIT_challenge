@@ -32,6 +32,7 @@ class CharacterDetailActivity:  AppCompatActivity() {
 
         characterAppearancesAdapter = CharacterAppearancesAdapter()
         binding.apply {
+            viewModel = characterDetailViewModel
             character = characterDetail
             rvAppearances.adapter = characterAppearancesAdapter
         }
@@ -46,12 +47,6 @@ class CharacterDetailActivity:  AppCompatActivity() {
                 finish()
             }
         }
-
-
-    }
-
-    override fun onStart() {
-        super.onStart()
         characterDetailViewModel.fetchComics(characterDetail?.id ?:0)
         setObservers()
     }
