@@ -15,16 +15,29 @@ class CharacterDetailViewModel(private val charactersRepository: CharactersRepos
     private val _characterComics = MutableLiveData<List<Comic>?>()
     val characterComics: LiveData<List<Comic>?> get() = _characterComics
 
+    private val _isLoading = MutableLiveData(false)
+    val isLoading: LiveData<Boolean> = _isLoading
+
+    private val _connectionError = MutableLiveData(false)
+    val connectionError: LiveData<Boolean> = _connectionError
+
     fun fetchComics(characterId: Int) {
         viewModelScope.launch {
-            when (val response = charactersRepository.getCharacterComics(characterId)) {
-                is NetResult.Success -> {
-                    _characterComics.value = response.data.comicsList?.listOfComics
+            _isLoading.value = true
+            try {
+                when (val response = charactersRepository.getCharacterComics(characterId)) {
+                    is NetResult.Success -> {
+                        _characterComics.value = response.data.comicsList?.listOfComics
+                        _connectionError.value = false
+                    }
+                    is NetResult.Error -> {
+                        _connectionError.value = true
+                    }
                 }
-                is NetResult.Error -> {
-                    // TODO complete
-                }
+            } catch (e:Exception) {
+                _connectionError.value = true
             }
+            _isLoading.value = false
         }
     }
 

@@ -54,10 +54,6 @@ class MainScreenActivity : AppCompatActivity() {
             bottomNavView.itemIconTintList = null
             tvUserName.text = user?.displayName
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
         setObservers()
     }
 
@@ -87,8 +83,8 @@ class MainScreenActivity : AppCompatActivity() {
             .signOut(applicationContext)
             .addOnCompleteListener {
                 val intent = Intent(applicationContext, LoginActivity::class.java)
-                startActivity(intent)
                 finish()
+                startActivity(intent)
             }
     }
 

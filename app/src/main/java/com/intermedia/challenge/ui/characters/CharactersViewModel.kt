@@ -29,20 +29,20 @@ class CharactersViewModel(private val charactersRepository: CharactersRepository
 
     fun loadCharacters(offset: Int) {
         viewModelScope.launch {
-            _isLoading.postValue(true)
+            _isLoading.value = true
             try {
                 when (val response = charactersRepository.getCharacters(offset)) {
                     is NetResult.Success -> {
                         _characters.postValue(response.data.charactersList.characters)
-                        _connectionError.postValue(false)
+                        _connectionError.value = false
                         _offset = offset.plus(15)
                     }
                     is NetResult.Error -> {
-                        _connectionError.postValue(true)
+                        _connectionError.value = true
                     }
                 }
             } catch (e:Exception) {
-                _connectionError.postValue(true)
+                _connectionError.value = true
             }
 
             _isLoading.postValue(false)

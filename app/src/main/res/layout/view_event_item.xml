@@ -26,7 +26,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clMainSection"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="wrap_content"
+                android:minHeight="120dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 

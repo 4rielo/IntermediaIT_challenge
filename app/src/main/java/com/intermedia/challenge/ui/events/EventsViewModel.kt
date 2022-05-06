@@ -25,7 +25,7 @@ class EventsViewModel(private val eventsRepository: EventsRepository) : ViewMode
 
     fun loadEvents(offset: Int = 0) {
         viewModelScope.launch {
-            _isLoading.postValue(true)
+            _isLoading.value = true
             try {
                 when (val response = eventsRepository.getEvents(offset)) {
                     is NetResult.Success -> {
@@ -36,7 +36,7 @@ class EventsViewModel(private val eventsRepository: EventsRepository) : ViewMode
                             when (response) {
                                 is NetResult.Success -> {
                                     eventsAndComics.add(event to response.data.comicsList?.listOfComics)
-                                    _connectionError.postValue(false)
+                                    _connectionError.value = false
                                 }
                                 is NetResult.Error -> {
                                     eventsAndComics.add(event to emptyList<Comic>())
@@ -46,13 +46,13 @@ class EventsViewModel(private val eventsRepository: EventsRepository) : ViewMode
                         _eventsAndComics.value = eventsAndComics
                     }
                     is NetResult.Error -> {
-                        _connectionError.postValue(true)
+                        _connectionError.value = true
                     }
                 }
             } catch (e: Exception) {
-                _connectionError.postValue(true)
+                _connectionError.value = true
             }
-            _isLoading.postValue(false)
+            _isLoading.value = false
         }
     }
 
