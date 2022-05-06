@@ -5,15 +5,21 @@
 Me costó más de lo que pensé, pero creo haber realizado lo pedido.
 
 Some Features:
-Drawer lateral (start-side), con nombre de usuario, y botón para "des-loguearse"
+Splash animation when opening app.
+Drawer lateral (start-side), con nombre de usuario, y botón para "des-loguearse".
 SwipeDown to refresh en pantallas de Personaje y Eventos.
 
+Detalles:
 Creo que la pantalla de la lista de eventos se puede optimizar en cuanto a recursos, pero actualmente no se me ocurre cómo.
+Si no estoy equivocado, los llamados de comics de cada evento se hacen de manera secuencial, y sé que hay una forma (con aync{} y .await() ) de hacerlos asincronos, es decir, no esperar a que un pedido a servidor termine para realizar otro llamado, pero no me alcanzó el tiempo para hacer ésto.
+
 
 ****NOTA: la función provista de "handleResult", para las llamadas a repositorio, cuando falla la conexión a internet, falla, pero no pude analizar en profundidad el porqué.
 Para solventar ésto, agregué un "try/catch", y evitar que la app crashee.
 
 
+Developer:
+Ariel Scarafia.
 
 # Descripción del Challenge
 
