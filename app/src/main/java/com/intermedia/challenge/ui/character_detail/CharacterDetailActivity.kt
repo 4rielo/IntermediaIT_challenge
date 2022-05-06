@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.view.isVisible
 import com.intermedia.challenge.R
 import com.intermedia.challenge.data.models.Character
 import com.intermedia.challenge.databinding.ActivityCharacterDetailBinding
@@ -53,6 +54,7 @@ class CharacterDetailActivity:  AppCompatActivity() {
 
     private fun setObservers() {
         observeComicsList()
+        observeLoadingStatus()
     }
 
     private fun observeComicsList() {
@@ -63,4 +65,12 @@ class CharacterDetailActivity:  AppCompatActivity() {
         }
     }
 
+    private fun observeLoadingStatus() {
+        characterDetailViewModel.isLoading.observe(this) {
+            binding.apply {
+                pbIsLoading.isVisible = it
+                tvIsLoading.isVisible = it
+            }
+        }
+    }
 }

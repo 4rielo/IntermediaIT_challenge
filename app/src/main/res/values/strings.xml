@@ -14,4 +14,5 @@
     <string name="data_is_being_loaded">Please wait while data is being fetched.</string>
     <string name="something_went_wrong">Algo salió mal. Por favor, intente nuevamente más tarde.</string>
     <string name="logout">Logout</string>
+    <string name="comics_to_discuss">COMICS TO DISCUSS</string>
 </resources>
