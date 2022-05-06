@@ -4,13 +4,13 @@
 
 Me costó más de lo que pensé, pero creo haber realizado lo pedido.
 
-Faltantes, en cuanto a criterio personal:
-Boton o menú para "desloguearse" (quizás un menú de tres botones en la parte superior derecha, o un "drawer" en alguno de los laterales, con dicha opción)
+Some Features:
+Drawer lateral (start-side), con nombre de usuario, y botón para "des-loguearse"
+SwipeDown to refresh en pantallas de Personaje y Eventos.
 
 Creo que la pantalla de la lista de eventos se puede optimizar en cuanto a recursos, pero actualmente no se me ocurre cómo.
 
-
-NOTA: la función provista de "handleResult", para las llamadas a repositorio, cuando falla la conexión a internet, falla, pero no pude analizar en profundidad el porqué.
+****NOTA: la función provista de "handleResult", para las llamadas a repositorio, cuando falla la conexión a internet, falla, pero no pude analizar en profundidad el porqué.
 Para solventar ésto, agregué un "try/catch", y evitar que la app crashee.
 
 
